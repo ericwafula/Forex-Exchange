@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     tools:context=".MainActivity">
 
     <TextView
@@ -27,13 +29,55 @@
         app:srcCompat="@drawable/exchange" />
 
     <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/forexImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:hint="username"
+        android:text=""
+        android:textSize="24dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="30dp"
+        android:hint="password"
+        android:text=""
+        android:textSize="24dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="116dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="#6C63FF"
+        android:textColor="@color/white"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textSize="34dp" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:hint="username"
-        android:maxLines="1"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="93dp"
+        android:text="CREATE AN ACCOUNT"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#6C63FF"/>
 
-        android:id="@+id/username"
-        />
 
 </RelativeLayout>
