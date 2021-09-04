@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, username);
                 Toast.makeText(MainActivity.this, username, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, converter.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
