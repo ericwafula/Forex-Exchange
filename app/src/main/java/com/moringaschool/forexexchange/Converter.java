@@ -14,6 +14,9 @@ public class Converter extends AppCompatActivity {
             "Australian Dollar(AUD)", "Swiss Franc(CHF)", "New Zealand Dollar(NZD)",
             "Japanese Yen(JPY)"
     };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,5 +32,7 @@ public class Converter extends AppCompatActivity {
         } else {
             user.setText("Welcome " + userName);
         }
+
+
     }
 }
