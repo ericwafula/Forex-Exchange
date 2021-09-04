@@ -31,6 +31,7 @@
         android:id="@+id/currencies"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/subheading"/>
+        android:layout_below="@+id/subheading"
+        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>
