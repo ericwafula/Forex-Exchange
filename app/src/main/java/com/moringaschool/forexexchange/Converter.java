@@ -10,7 +10,9 @@ import android.widget.TextView;
 public class Converter extends AppCompatActivity {
     TextView user;
     String[] currencies = new String[] {
-
+            "US Dollar(USD)", "Canadian DollarCAD", "British Pound(GBP)", "Euro(EUR)",
+            "Australian Dollar(AUD)", "Swiss Franc(CHF)", "New Zealand Dollar(NZD)",
+            "Japanese Yen(JPY)"
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
