@@ -27,6 +27,9 @@
         android:text="Here is a list of major pairs"/>
 
 
-
+    <ListView
+        android:id="@+id/currencies"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
