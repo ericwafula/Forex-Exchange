@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ForexExchange">
         <activity
-            android:name=".converter"
+            android:name=".Converter"
             android:exported="true" />
         <activity
-            android:name=".password"
+            android:name=".CreateAccount"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

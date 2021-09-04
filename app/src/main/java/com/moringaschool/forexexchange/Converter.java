@@ -7,16 +7,22 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class converter extends AppCompatActivity {
+public class Converter extends AppCompatActivity {
     TextView user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converter);
 
-        user = (TextView) findViewById(R.id.user);
+        user = (TextView) findViewById(R.id.firstName);
         Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        user.setText("Welcome " + username);
+        String firstName = intent.getStringExtra("firstName");
+        String userName = intent.getStringExtra("username");
+
+        if (firstName.length() != 0){
+            user.setText("Welcome " + firstName);
+        } else {
+            user.setText("Welcome " + userName);
+        }
     }
 }
