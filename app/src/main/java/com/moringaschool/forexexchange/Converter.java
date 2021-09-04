@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 public class Converter extends AppCompatActivity {
     TextView user;
+    String[] currencies = new String[] {
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

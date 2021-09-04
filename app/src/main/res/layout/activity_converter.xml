@@ -14,6 +14,6 @@
         android:layout_marginTop="40dp"
         android:text="Welcome"
         android:textColor="@color/primary"
-        android:textSize="32dp" />
+        android:textSize="32sp" />
 
 </RelativeLayout>

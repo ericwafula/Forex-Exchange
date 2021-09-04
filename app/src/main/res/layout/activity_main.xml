@@ -37,7 +37,7 @@
         android:layout_marginTop="30dp"
         android:hint="username"
         android:text=""
-        android:textSize="24dp" />
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/password"
@@ -48,7 +48,7 @@
         android:layout_marginTop="30dp"
         android:hint="password"
         android:text=""
-        android:textSize="24dp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/forgottenPassword"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:text="@string/forgotten_password"
         android:layout_below="@id/password"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textColor="@color/primary"
         android:layout_marginTop="10dp" />
 
@@ -73,7 +73,7 @@
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="34dp" />
+        android:textSize="34sp" />
 
     <TextView
         android:id="@+id/createAnAccountText"
@@ -84,7 +84,7 @@
         android:text="CREATE AN ACCOUNT"
         android:layout_marginTop="50dp"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="@color/primary"/>
 
 
