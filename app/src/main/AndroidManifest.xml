@@ -10,9 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ForexExchange">
         <activity
+            android:name=".converter"
+            android:exported="true" />
+        <activity
+            android:name=".password"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/NoActionBarTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
