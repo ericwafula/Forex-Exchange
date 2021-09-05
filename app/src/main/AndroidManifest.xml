@@ -11,10 +11,12 @@
         android:theme="@style/Theme.ForexExchange">
         <activity
             android:name=".Converter"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/NoActionBarTheme"/>
         <activity
             android:name=".CreateAccount"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/NoActionBarTheme"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

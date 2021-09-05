@@ -34,14 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == mLogin){
             String username = mUsername.getText().toString();
-            Log.d(TAG, username);
             Toast.makeText(MainActivity.this, username, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, Converter.class);
             intent.putExtra("username", username);
             startActivity(intent);
-        }
-
-        if (view == createAnAccount){
+        } else if (view == createAnAccount){
             Intent intent = new Intent(MainActivity.this, CreateAccount.class);
             startActivity(intent);
         }

@@ -1,91 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    tools:context=".MainActivity">
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true">
 
-    <TextView
-        android:id="@+id/appName"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="ForexChange"
-        android:textColor="@color/primary"
-        android:textSize="48sp" />
+        >
 
-    <ImageView
-        android:id="@+id/forexImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="140dp"
-        app:srcCompat="@drawable/exchange" />
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="ForexChange"
+            android:textColor="@color/primary"
+            android:textSize="48sp" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/forexImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:hint="username"
-        android:text=""
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:hint="password"
-        android:text=""
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/forgottenPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/forgotten_password"
-        android:layout_below="@id/password"
-        android:textSize="18sp"
-        android:textColor="@color/primary"
-        android:layout_marginTop="10dp" />
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/forgottenPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@color/primary"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="34sp" />
-
-    <TextView
-        android:id="@+id/createAnAccountText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginButton"
-        android:layout_centerHorizontal="true"
-        android:text="CREATE AN ACCOUNT"
-        android:layout_marginTop="50dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@color/primary"/>
+        <ImageView
+            android:id="@+id/forexImage"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_below="@+id/appName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            app:srcCompat="@drawable/exchange"
+            android:contentDescription="TODO" />
 
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/forexImage"
+            android:layout_marginTop="30dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="username"
+                android:text=""
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="password"
+                android:text=""
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/forgottenPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgotten_password"
+                android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/primary"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/createAnAccountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CREATE AN ACCOUNT"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/primary"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

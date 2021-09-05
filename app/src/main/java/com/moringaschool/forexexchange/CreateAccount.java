@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateAccount extends AppCompatActivity implements View.OnClickListener{
-    @BindView(R.id.firstName) EditText firstName;
+    @BindView(R.id.firstName) EditText mFirstName;
     @BindView(R.id.password) EditText password;
     @BindView(R.id.signupButton) Button signupButton;
     @BindView(R.id.alreadyHaveAnAccount) TextView alreadyHaveAnAccount;
@@ -33,14 +33,12 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view == signupButton){
-            String firstname = firstName.getText().toString();
-            Toast.makeText(CreateAccount.this, "Account successfully created", Toast.LENGTH_LONG).show();
+            String firstName = mFirstName.getText().toString();
+            Toast.makeText(CreateAccount.this, firstName, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(CreateAccount.this, Converter.class);
-            intent.putExtra("firstname", firstname);
+            intent.putExtra("firstName", firstName);
             startActivity(intent);
-        }
-
-        if (view == alreadyHaveAnAccount){
+        } else if (view == alreadyHaveAnAccount){
             Intent intent = new Intent(CreateAccount.this, MainActivity.class);
             startActivity(intent);
         }

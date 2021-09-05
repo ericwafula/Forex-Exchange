@@ -35,11 +35,9 @@ public class Converter extends AppCompatActivity {
         String firstName = intent.getStringExtra("firstName");
         String userName = intent.getStringExtra("username");
 
-        if (firstName.length() != 0){
-            mUser.setText("Welcome " + firstName);
-        } else {
-            mUser.setText("Welcome " + userName);
-        }
+        mUser.setText("Welcome " + firstName);
+
+        mUser.setText("Welcome " + userName);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, currencies);
         mCurrencyList.setAdapter(adapter);
