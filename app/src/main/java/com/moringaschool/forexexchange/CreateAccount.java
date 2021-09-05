@@ -1,6 +1,7 @@
 package com.moringaschool.forexexchange;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.*;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CreateAccount extends AppCompatActivity {
-    EditText firstName;
-    EditText password;
-    Button signupButton;
+    @BindView(R.id.firstName) EditText firstName;
+    @BindView(R.id.password) EditText password;
+    @BindView(R.id.signupButton) Button signupButton;
+
     public static final String TAG = CreateAccount.class.getSimpleName();
 
     @Override
@@ -20,9 +22,7 @@ public class CreateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
 
-        password = (EditText) findViewById(R.id.password);
-        signupButton = (Button) findViewById(R.id.signupButton);
-        firstName = (EditText) findViewById(R.id.firstName);
+        ButterKnife.bind(this);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override

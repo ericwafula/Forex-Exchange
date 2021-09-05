@@ -1,6 +1,8 @@
 package com.moringaschool.forexexchange;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.*;
+import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button mLogin;
-    EditText mUsername;
+    @BindView(R.id.loginButton) Button mLogin;
+    @BindView(R.id.username) EditText mUsername;
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -20,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mLogin = (Button) findViewById(R.id.loginButton);
-        mUsername = (EditText) findViewById(R.id.username);
+        ButterKnife.bind(this);
+
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
