@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateAccount extends AppCompatActivity {
+public class CreateAccount extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.firstName) EditText firstName;
     @BindView(R.id.password) EditText password;
     @BindView(R.id.signupButton) Button signupButton;
+    @BindView(R.id.alreadyHaveAnAccount) TextView alreadyHaveAnAccount;
 
     public static final String TAG = CreateAccount.class.getSimpleName();
 
@@ -24,15 +26,23 @@ public class CreateAccount extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String firstname = firstName.getText().toString();
-                Toast.makeText(CreateAccount.this, "Account successfully created", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(CreateAccount.this, Converter.class);
-                intent.putExtra("firstname", firstname);
-                startActivity(intent);
-            }
-        });
+        signupButton.setOnClickListener(this);
+        alreadyHaveAnAccount.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == signupButton){
+            String firstname = firstName.getText().toString();
+            Toast.makeText(CreateAccount.this, "Account successfully created", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(CreateAccount.this, Converter.class);
+            intent.putExtra("firstname", firstname);
+            startActivity(intent);
+        }
+
+        if (view == alreadyHaveAnAccount){
+            Intent intent = new Intent(CreateAccount.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 }
