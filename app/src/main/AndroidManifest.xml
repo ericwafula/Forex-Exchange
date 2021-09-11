@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ForexExchange">
         <activity
-            android:name=".Converter"
+            android:name=".ui.Converter"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"/>
         <activity
-            android:name=".CreateAccount"
+            android:name=".ui.CreateAccount"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>

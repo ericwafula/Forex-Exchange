@@ -1,4 +1,4 @@
-package com.moringaschool.forexexchange;
+package com.moringaschool.forexexchange.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.*;
@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.moringaschool.forexexchange.R;
+
 public class Converter extends AppCompatActivity {
-    @BindView(R.id.user) TextView mUser;
-    @BindView(R.id.currencies) ListView mCurrencyList;
+    @BindView(com.moringaschool.forexexchange.R.id.user) TextView mUser;
+    @BindView(com.moringaschool.forexexchange.R.id.currencies) ListView mCurrencyList;
 
     String[] currencies = new String[] {
             "US Dollar(USD)", "Canadian DollarCAD", "British Pound(GBP)", "Euro(EUR)",
