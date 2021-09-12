@@ -73,20 +73,24 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         call.enqueue(new Callback<USDRateResponse>() {
             @Override
             public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
-                ConversionRates currenciesObject = response.body().getConversionRates();
+                if (response.isSuccessful()){
+                    ConversionRates currenciesObject = response.body().getConversionRates();
 
-                mRate.setText("Rate: " );
+                    mRate.setText("Rate: " );
 
-                individualCurrency.add("EUR/USD - " + currenciesObject.getEur().toString());
-                individualCurrency.add("AUD/USD - " + currenciesObject.getAud().toString());
-                individualCurrency.add("GBP/USD - " + currenciesObject.getGbp().toString());
-                individualCurrency.add("USD/CAD - " + currenciesObject.getCad().toString());
-                individualCurrency.add("USD/JPY - " + currenciesObject.getJpy().toString());
-                individualCurrency.add("USD/CHF - " + currenciesObject.getChf().toString());
-                individualCurrency.add("NZD/USD - " + currenciesObject.getNzd().toString());
+                    individualCurrency.add("EUR/USD - " + currenciesObject.getEur().toString());
+                    individualCurrency.add("AUD/USD - " + currenciesObject.getAud().toString());
+                    individualCurrency.add("GBP/USD - " + currenciesObject.getGbp().toString());
+                    individualCurrency.add("USD/CAD - " + currenciesObject.getCad().toString());
+                    individualCurrency.add("USD/JPY - " + currenciesObject.getJpy().toString());
+                    individualCurrency.add("USD/CHF - " + currenciesObject.getChf().toString());
+                    individualCurrency.add("NZD/USD - " + currenciesObject.getNzd().toString());
 
-                ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
-                mCurrencyList.setAdapter(adapter);
+                    ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
+                    mCurrencyList.setAdapter(adapter);
+                } else{
+                    Toast.makeText(Converter.this, "Something went wrong. Please try again later", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
