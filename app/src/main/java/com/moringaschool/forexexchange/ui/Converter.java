@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,17 +27,15 @@ import com.moringaschool.forexexchange.network.ForexExchangeClient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Converter extends AppCompatActivity {
+public class Converter extends AppCompatActivity implements View.OnClickListener{
     @BindView(com.moringaschool.forexexchange.R.id.user) TextView mUser;
     @BindView(com.moringaschool.forexexchange.R.id.currencies) ListView mCurrencyList;
+    @BindView(R.id.baseCurrency) EditText mBaseCurrency;
+    @BindView(R.id.quoteCurrency) EditText mQuoteCurrency;
+    @BindView(R.id.calculateButton) Button mCalculate;
 
-
-    String[] currencies = new String[] {
-            "US Dollar(USD)", "Canadian DollarCAD", "British Pound(GBP)", "Euro(EUR)",
-            "Australian Dollar(AUD)", "Swiss Franc(CHF)", "New Zealand Dollar(NZD)",
-            "Japanese Yen(JPY)"
-    };
-
+    List<String> individualCurrency = new ArrayList<>();
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class Converter extends AppCompatActivity {
         setContentView(R.layout.activity_converter);
 
         ButterKnife.bind(this);
+        mCalculate.setOnClickListener(this);
 
         Intent intent = getIntent();
         String firstName = intent.getStringExtra("firstName");
@@ -51,9 +52,6 @@ public class Converter extends AppCompatActivity {
         mUser.setText("Welcome " + firstName);
 
         mUser.setText("Welcome " + userName);
-
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, currencies);
-//        mCurrencyList.setAdapter(adapter);
 
         mCurrencyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,7 +68,7 @@ public class Converter extends AppCompatActivity {
             @Override
             public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
                 ConversionRates currenciesObject = response.body().getConversionRates();
-                List<String> individualCurrency = new ArrayList<>();
+
                 individualCurrency.add("USD " + currenciesObject.getUsd().toString());
                 individualCurrency.add("AUD " + currenciesObject.getAud().toString());
                 individualCurrency.add("GBP " + currenciesObject.getGbp().toString());
@@ -85,5 +83,15 @@ public class Converter extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == mCalculate){
+            String baseCurrency = mBaseCurrency.getText().toString();
+            String quoteCurrency = mQuoteCurrency.getText().toString();
+
+            Toast.makeText(Converter.this, baseCurrency + ", " + quoteCurrency, Toast.LENGTH_LONG).show();
+        }
     }
 }
