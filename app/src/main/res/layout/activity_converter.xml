@@ -26,12 +26,13 @@
         android:textSize="24sp"
         android:text="Here is a list of major pairs"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/currencies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/subheading"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="40dp"/>
+
 
 
 </RelativeLayout>
