@@ -9,7 +9,7 @@ public class ForexExchangeClient {
     public static ForexExchangeApi getClient(){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://v6.exchangerate-api.com/v6/")
+                    .baseUrl(Constants.EXCHANGE_RATE_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

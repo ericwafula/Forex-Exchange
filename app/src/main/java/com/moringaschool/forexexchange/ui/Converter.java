@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.moringaschool.forexexchange.ConversionRates;
 import com.moringaschool.forexexchange.R;
 import com.moringaschool.forexexchange.models.USDRateResponse;
+import com.moringaschool.forexexchange.network.Constants;
 import com.moringaschool.forexexchange.network.ForexExchangeApi;
 import com.moringaschool.forexexchange.network.ForexExchangeClient;
 
@@ -63,7 +64,7 @@ public class Converter extends AppCompatActivity {
         });
 
         ForexExchangeApi client = ForexExchangeClient.getClient();
-        Call<USDRateResponse> call = client.getCurrencies();
+        Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY);
 
         call.enqueue(new Callback<USDRateResponse>() {
             @Override
