@@ -89,8 +89,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if(view == mCalculate){
-            String baseCurrency = mBaseCurrency.getText().toString();
-            String quoteCurrency = mQuoteCurrency.getText().toString();
+            baseCurrency = mBaseCurrency.getText().toString().toUpperCase();
+            quoteCurrency = mQuoteCurrency.getText().toString().toUpperCase();
 
             Toast.makeText(Converter.this, baseCurrency + ", " + quoteCurrency, Toast.LENGTH_LONG).show();
         }
