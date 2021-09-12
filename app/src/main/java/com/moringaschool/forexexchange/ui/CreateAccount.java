@@ -1,4 +1,4 @@
-package com.moringaschool.forexexchange;
+package com.moringaschool.forexexchange.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.*;
@@ -11,14 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.moringaschool.forexexchange.R;
+
 public class CreateAccount extends AppCompatActivity implements View.OnClickListener{
-    @BindView(R.id.firstName) EditText mFirstName;
-    @BindView(R.id.lastName) EditText mLastName;
-    @BindView(R.id.userName) EditText mUsername;
-    @BindView(R.id.email) EditText mEmail;
-    @BindView(R.id.password) EditText mPassword;
-    @BindView(R.id.signupButton) Button signupButton;
-    @BindView(R.id.alreadyHaveAnAccount) TextView alreadyHaveAnAccount;
+    @BindView(com.moringaschool.forexexchange.R.id.firstName) EditText mFirstName;
+    @BindView(com.moringaschool.forexexchange.R.id.lastName) EditText mLastName;
+    @BindView(com.moringaschool.forexexchange.R.id.userName) EditText mUsername;
+    @BindView(com.moringaschool.forexexchange.R.id.email) EditText mEmail;
+    @BindView(com.moringaschool.forexexchange.R.id.password) EditText mPassword;
+    @BindView(com.moringaschool.forexexchange.R.id.signupButton) Button signupButton;
+    @BindView(com.moringaschool.forexexchange.R.id.alreadyHaveAnAccount) TextView alreadyHaveAnAccount;
 
     public static final String TAG = CreateAccount.class.getSimpleName();
 
