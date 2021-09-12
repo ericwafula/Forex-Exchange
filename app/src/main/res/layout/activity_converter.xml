@@ -91,13 +91,15 @@
         android:textSize="24sp"
         android:text=""/>
 
-    <ListView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/currencies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/subheading"
+        android:layout_below="@id/subheading"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="40dp"/>
-
 
 
 </RelativeLayout>
