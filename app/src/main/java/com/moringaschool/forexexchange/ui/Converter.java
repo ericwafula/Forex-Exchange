@@ -35,7 +35,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.calculateButton) Button mCalculate;
 
     List<String> individualCurrency = new ArrayList<>();
-    
+    private String baseCurrency;
+    private String quoteCurrency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
