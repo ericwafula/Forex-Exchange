@@ -33,6 +33,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.baseCurrency) EditText mBaseCurrency;
     @BindView(R.id.quoteCurrency) EditText mQuoteCurrency;
     @BindView(R.id.calculateButton) Button mCalculate;
+    @BindView(R.id.subheading) TextView mSubheading;
 
     List<String> individualCurrency = new ArrayList<>();
     private String baseCurrency;
@@ -70,6 +71,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         if(view == mCalculate){
             baseCurrency = mBaseCurrency.getText().toString().toUpperCase();
             quoteCurrency = mQuoteCurrency.getText().toString().toUpperCase();
+            mSubheading.setText(R.string.subheading);
 
             Toast.makeText(Converter.this, baseCurrency + ", " + quoteCurrency, Toast.LENGTH_LONG).show();
 

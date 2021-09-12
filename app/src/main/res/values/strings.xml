@@ -4,4 +4,5 @@
     <string name="base_currency">USD</string>
     <string name="welcome_message">Welcome</string>
     <string name="quote_currency">KES</string>
+    <string name="subheading">Here is a list of major pairs</string>
 </resources>
