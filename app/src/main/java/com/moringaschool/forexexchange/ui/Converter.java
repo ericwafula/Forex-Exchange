@@ -70,10 +70,10 @@ public class Converter extends AppCompatActivity {
             public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
                 ConversionRates currenciesObject = response.body().getConversionRates();
                 List<String> individualCurrency = new ArrayList<>();
-                individualCurrency.add("USD" + currenciesObject.getUsd().toString());
-                individualCurrency.add("AUD" + currenciesObject.getAud().toString());
-                individualCurrency.add("GBP" + currenciesObject.getGbp().toString());
-                individualCurrency.add("CAD" + currenciesObject.getCad().toString());
+                individualCurrency.add("USD " + currenciesObject.getUsd().toString());
+                individualCurrency.add("AUD " + currenciesObject.getAud().toString());
+                individualCurrency.add("GBP " + currenciesObject.getGbp().toString());
+                individualCurrency.add("CAD " + currenciesObject.getCad().toString());
 
                 ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
                 mCurrencyList.setAdapter(adapter);
