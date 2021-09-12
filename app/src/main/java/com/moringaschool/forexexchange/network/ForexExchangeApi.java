@@ -9,8 +9,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ForexExchangeApi {
-    @GET("{ApiKey}/latest/USD")
+    @GET("{ApiKey}/latest/{currency}")
     Call<USDRateResponse> getCurrencies(
-            @Path("ApiKey") String apiKey
+            @Path("ApiKey") String apiKey,
+            @Path("currency") String currency
     );
 }

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Forex Exchange</string>
     <string name="forgotten_password">Forgotten password?</string>
+    <string name="base_currency">USD</string>
+    <string name="welcome_message">Welcome</string>
+    <string name="quote_currency">KES</string>
 </resources>

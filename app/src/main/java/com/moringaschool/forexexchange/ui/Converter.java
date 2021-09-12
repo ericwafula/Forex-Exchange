@@ -64,7 +64,7 @@ public class Converter extends AppCompatActivity {
         });
 
         ForexExchangeApi client = ForexExchangeClient.getClient();
-        Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY);
+        Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY, "USD");
 
         call.enqueue(new Callback<USDRateResponse>() {
             @Override
