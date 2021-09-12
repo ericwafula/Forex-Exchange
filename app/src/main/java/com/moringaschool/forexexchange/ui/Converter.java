@@ -26,6 +26,7 @@ import com.moringaschool.forexexchange.network.ForexExchangeClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Converter extends AppCompatActivity implements View.OnClickListener{
     @BindView(com.moringaschool.forexexchange.R.id.user) TextView mUser;
@@ -34,6 +35,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.quoteCurrency) EditText mQuoteCurrency;
     @BindView(R.id.calculateButton) Button mCalculate;
     @BindView(R.id.subheading) TextView mSubheading;
+    @BindView(R.id.rate) TextView mRate;
 
     List<String> individualCurrency = new ArrayList<>();
     private String baseCurrency;
@@ -46,6 +48,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
 
         ButterKnife.bind(this);
         mCalculate.setOnClickListener(this);
+
+        mSubheading.setText(R.string.subheading);
 
         Intent intent = getIntent();
         String firstName = intent.getStringExtra("firstName");
@@ -63,7 +67,33 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
             }
         });
 
+        ForexExchangeApi client = ForexExchangeClient.getClient();
+        Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY, "USD");
 
+        call.enqueue(new Callback<USDRateResponse>() {
+            @Override
+            public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
+                ConversionRates currenciesObject = response.body().getConversionRates();
+
+                mRate.setText("Rate: " );
+
+                individualCurrency.add("EUR/USD - " + currenciesObject.getEur().toString());
+                individualCurrency.add("AUD/USD - " + currenciesObject.getAud().toString());
+                individualCurrency.add("GBP/USD - " + currenciesObject.getGbp().toString());
+                individualCurrency.add("USD/CAD - " + currenciesObject.getCad().toString());
+                individualCurrency.add("USD/JPY - " + currenciesObject.getJpy().toString());
+                individualCurrency.add("USD/CHF - " + currenciesObject.getChf().toString());
+                individualCurrency.add("NZD/USD - " + currenciesObject.getNzd().toString());
+
+                ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
+                mCurrencyList.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<USDRateResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -71,32 +101,10 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         if(view == mCalculate){
             baseCurrency = mBaseCurrency.getText().toString().toUpperCase();
             quoteCurrency = mQuoteCurrency.getText().toString().toUpperCase();
-            mSubheading.setText(R.string.subheading);
+            String convertedQuote = quoteCurrency.substring(0, 1) +  quoteCurrency.substring(1, 2).toLowerCase() + quoteCurrency.substring(2).toLowerCase();
 
-            Toast.makeText(Converter.this, baseCurrency + ", " + quoteCurrency, Toast.LENGTH_LONG).show();
+            Toast.makeText(Converter.this, convertedQuote, Toast.LENGTH_LONG).show();
 
-            ForexExchangeApi client = ForexExchangeClient.getClient();
-            Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY, "USD");
-
-            call.enqueue(new Callback<USDRateResponse>() {
-                @Override
-                public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
-                    ConversionRates currenciesObject = response.body().getConversionRates();
-
-                    individualCurrency.add("USD " + currenciesObject.getUsd().toString());
-                    individualCurrency.add("AUD " + currenciesObject.getAud().toString());
-                    individualCurrency.add("GBP " + currenciesObject.getGbp().toString());
-                    individualCurrency.add("CAD " + currenciesObject.getCad().toString());
-
-                    ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
-                    mCurrencyList.setAdapter(adapter);
-                }
-
-                @Override
-                public void onFailure(Call<USDRateResponse> call, Throwable t) {
-
-                }
-            });
         }
     }
 }
