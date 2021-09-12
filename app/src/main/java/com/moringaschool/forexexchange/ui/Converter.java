@@ -62,28 +62,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-        ForexExchangeApi client = ForexExchangeClient.getClient();
-        Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY, "USD");
 
-        call.enqueue(new Callback<USDRateResponse>() {
-            @Override
-            public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
-                ConversionRates currenciesObject = response.body().getConversionRates();
-
-                individualCurrency.add("USD " + currenciesObject.getUsd().toString());
-                individualCurrency.add("AUD " + currenciesObject.getAud().toString());
-                individualCurrency.add("GBP " + currenciesObject.getGbp().toString());
-                individualCurrency.add("CAD " + currenciesObject.getCad().toString());
-
-                ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
-                mCurrencyList.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<USDRateResponse> call, Throwable t) {
-
-            }
-        });
     }
 
     @Override
@@ -93,6 +72,29 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
             quoteCurrency = mQuoteCurrency.getText().toString().toUpperCase();
 
             Toast.makeText(Converter.this, baseCurrency + ", " + quoteCurrency, Toast.LENGTH_LONG).show();
+
+            ForexExchangeApi client = ForexExchangeClient.getClient();
+            Call<USDRateResponse> call = client.getCurrencies(Constants.EXCHANGE_RATE_API_KEY, "USD");
+
+            call.enqueue(new Callback<USDRateResponse>() {
+                @Override
+                public void onResponse(Call<USDRateResponse> call, Response<USDRateResponse> response) {
+                    ConversionRates currenciesObject = response.body().getConversionRates();
+
+                    individualCurrency.add("USD " + currenciesObject.getUsd().toString());
+                    individualCurrency.add("AUD " + currenciesObject.getAud().toString());
+                    individualCurrency.add("GBP " + currenciesObject.getGbp().toString());
+                    individualCurrency.add("CAD " + currenciesObject.getCad().toString());
+
+                    ArrayAdapter adapter = new ArrayAdapter(Converter.this, android.R.layout.simple_list_item_1, individualCurrency);
+                    mCurrencyList.setAdapter(adapter);
+                }
+
+                @Override
+                public void onFailure(Call<USDRateResponse> call, Throwable t) {
+
+                }
+            });
         }
     }
 }
