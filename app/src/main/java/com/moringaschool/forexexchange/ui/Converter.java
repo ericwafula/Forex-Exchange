@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,7 +68,12 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(Converter.this, currency.substring(0, 7), Toast.LENGTH_LONG).show();
                 Uri link = Uri.parse("https://www.google.com/search?q=" + currency.substring(0, 7));
                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH, link);
-                startActivity(intent);
+
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e){
+                    Toast.makeText(Converter.this, "Unable to locate activity" + e, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
