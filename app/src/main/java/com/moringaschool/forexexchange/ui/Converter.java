@@ -7,6 +7,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -63,7 +64,10 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String currency = ((TextView) view).getText().toString();
-                Toast.makeText(Converter.this, currency, Toast.LENGTH_LONG).show();
+                Toast.makeText(Converter.this, currency.substring(0, 7), Toast.LENGTH_LONG).show();
+                Uri link = Uri.parse("https://www.google.com/search?q=" + currency.substring(0, 7));
+                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH, link);
+                startActivity(intent);
             }
         });
 
