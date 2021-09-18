@@ -1,5 +1,6 @@
 package com.moringaschool.forexexchange.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.*;
 import retrofit2.Call;
@@ -12,6 +13,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,8 +23,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.moringaschool.forexexchange.ConversionRates;
 import com.moringaschool.forexexchange.R;
 import com.moringaschool.forexexchange.models.USDRateResponse;
@@ -36,6 +41,7 @@ import java.util.Locale;
 
 public class Converter extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrencyPair;
+    public static final String TAG = Converter.class.getSimpleName().toString();
 
     @BindView(com.moringaschool.forexexchange.R.id.user) TextView mUser;
     @BindView(com.moringaschool.forexexchange.R.id.currencies) ListView mCurrencyList;
@@ -59,6 +65,21 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_CURRENCY_PAIR);
+
+        mCurrencyPair.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot currencySnapshot : snapshot.getChildren()){
+                    String currency = currencySnapshot.getValue().toString();
+                    Log.d("Currencies updated", "currency: " + currency);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converter);
