@@ -121,7 +121,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         if(view == mCalculate){
 
-            Toast.makeText(Converter.this, convertedQuote, Toast.LENGTH_LONG).show();
+
 
         }
     }
