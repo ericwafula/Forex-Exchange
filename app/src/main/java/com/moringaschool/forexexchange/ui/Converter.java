@@ -141,6 +141,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
             String quoteCurrency = mQuoteCurrency.getText().toString();
 
             if(!(baseCurrency.isEmpty() && quoteCurrency.isEmpty())){
+                saveCurrencyToFirebase(baseCurrency, quoteCurrency);
                 addToSharedPreferences(baseCurrency, quoteCurrency);
                 Toast.makeText(Converter.this, baseCurrency + "/" + quoteCurrency + " cached", Toast.LENGTH_LONG).show();
             }
@@ -150,5 +151,10 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     public void addToSharedPreferences(String base, String quote){
         mEditor.putString(Constants.PREFERENCES_BASE_CURRENCY, base).apply();
         mEditor.putString(Constants.PREFERENCES_QUOTE_CURRENCY, quote).apply();
+    }
+
+    public void saveCurrencyToFirebase(String base, String quote){
+        String currencyPair = base + "/" + quote;
+        mCurrencyPair.setValue(currencyPair);
     }
 }
