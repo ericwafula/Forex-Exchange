@@ -21,6 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.forexexchange.ConversionRates;
 import com.moringaschool.forexexchange.R;
 import com.moringaschool.forexexchange.models.USDRateResponse;
@@ -33,6 +35,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class Converter extends AppCompatActivity implements View.OnClickListener{
+    private DatabaseReference mCurrencyPair;
+
     @BindView(com.moringaschool.forexexchange.R.id.user) TextView mUser;
     @BindView(com.moringaschool.forexexchange.R.id.currencies) ListView mCurrencyList;
     @BindView(R.id.baseCurrency) EditText mBaseCurrency;
@@ -42,8 +46,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.rate) TextView mRate;
 
     List<String> individualCurrency = new ArrayList<>();
-    String mRecentBaseCurrency;
-    String mRecentQuoteCurrency;
+    private String mRecentBaseCurrency;
+    private String mRecentQuoteCurrency;
 
     // Preference manager
     SharedPreferences mSharedPreferences;
@@ -51,6 +55,11 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mCurrencyPair = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_CURRENCY_PAIR);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converter);
 
