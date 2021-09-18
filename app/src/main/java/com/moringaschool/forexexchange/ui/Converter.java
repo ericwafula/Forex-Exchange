@@ -8,8 +8,10 @@ import retrofit2.Response;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +45,10 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     private String baseCurrency;
     private String quoteCurrency;
 
+    // Preference manager
+    SharedPreferences mSharedPreferences;
+    SharedPreferences.Editor mEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,9 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         mCalculate.setOnClickListener(this);
 
         mSubheading.setText(R.string.subheading);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
 
         Intent intent = getIntent();
         String firstName = intent.getStringExtra("firstName");

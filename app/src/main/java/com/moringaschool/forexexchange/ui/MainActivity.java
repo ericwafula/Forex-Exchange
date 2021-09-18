@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view == mLogin){
             String username = mUsername.getText().toString();
             String password = mPassword.getText().toString();
+
+
 
             if(!(username.isEmpty() || password.isEmpty())){
                 Intent intent = new Intent(MainActivity.this, Converter.class);
