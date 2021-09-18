@@ -143,7 +143,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
             if(!(baseCurrency.isEmpty() && quoteCurrency.isEmpty())){
                 saveCurrencyToFirebase(baseCurrency, quoteCurrency);
                 addToSharedPreferences(baseCurrency, quoteCurrency);
-                Toast.makeText(Converter.this, baseCurrency + "/" + quoteCurrency + " cached", Toast.LENGTH_LONG).show();
+                Toast.makeText(Converter.this, baseCurrency + "/" + quoteCurrency + " saved to history in database", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -155,6 +155,6 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
 
     public void saveCurrencyToFirebase(String base, String quote){
         String currencyPair = base + "/" + quote;
-        mCurrencyPair.setValue(currencyPair);
+        mCurrencyPair.push().setValue(currencyPair);
     }
 }
