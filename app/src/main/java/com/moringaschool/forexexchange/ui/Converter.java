@@ -42,8 +42,6 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.rate) TextView mRate;
 
     List<String> individualCurrency = new ArrayList<>();
-    private String baseCurrency;
-    private String quoteCurrency;
 
     // Preference manager
     SharedPreferences mSharedPreferences;
@@ -122,12 +120,14 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if(view == mCalculate){
-            baseCurrency = mBaseCurrency.getText().toString().toUpperCase();
-            quoteCurrency = mQuoteCurrency.getText().toString().toUpperCase();
-            String convertedQuote = quoteCurrency.substring(0, 1) +  quoteCurrency.substring(1, 2).toLowerCase() + quoteCurrency.substring(2).toLowerCase();
 
             Toast.makeText(Converter.this, convertedQuote, Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    public void addToSharedPreferences(String base, String quote){
+        mEditor.putString(Constants.PREFERENCES_BASE_CURRENCY, base).apply();
+        mEditor.putString(Constants.PREFERENCES_QUOTE_CURRENCY, quote).apply();
     }
 }
