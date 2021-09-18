@@ -122,6 +122,11 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         if(view == mCalculate){
             String baseCurrency = mBaseCurrency.getText().toString();
             String quoteCurrency = mQuoteCurrency.getText().toString();
+
+            if(!(baseCurrency.isEmpty() && quoteCurrency.isEmpty())){
+                addToSharedPreferences(baseCurrency, quoteCurrency);
+                Toast.makeText(Converter.this, baseCurrency + "/" + quoteCurrency + " cached", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
