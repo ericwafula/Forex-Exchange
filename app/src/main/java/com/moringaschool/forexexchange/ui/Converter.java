@@ -63,6 +63,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         mRecentBaseCurrency = mSharedPreferences.getString(Constants.PREFERENCES_BASE_CURRENCY, null);
         mRecentQuoteCurrency = mSharedPreferences.getString(Constants.PREFERENCES_QUOTE_CURRENCY, null);
 
+        mBaseCurrency.setText(mRecentBaseCurrency);
+        mQuoteCurrency.setText(mRecentQuoteCurrency);
 
         mEditor = mSharedPreferences.edit();
 

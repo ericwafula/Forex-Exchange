@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "141799841381",
+    "project_id": "forex-exchange-36380",
+    "storage_bucket": "forex-exchange-36380.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141799841381:android:4ca8d1e9772f356099b08c",
+        "android_client_info": {
+          "package_name": "com.moringaschool.forexexchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141799841381-nku2ri2v8r2jlb163vphdcaegkrehjm9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moringaschool.forexexchange",
+            "certificate_hash": "c4997b00d7e134f827bce65811cd1d485b9443fc"
+          }
+        },
+        {
+          "client_id": "141799841381-j49nopinn0l7o2jrpdctnmaab0fvvi5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBipP2l35KTApflZFNM54E27d-lEu2Erik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141799841381-j49nopinn0l7o2jrpdctnmaab0fvvi5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
