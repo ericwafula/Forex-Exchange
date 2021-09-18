@@ -120,9 +120,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if(view == mCalculate){
-
-
-
+            String baseCurrency = mBaseCurrency.getText().toString();
+            String quoteCurrency = mQuoteCurrency.getText().toString();
         }
     }
 
