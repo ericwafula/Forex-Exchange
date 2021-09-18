@@ -42,6 +42,8 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.rate) TextView mRate;
 
     List<String> individualCurrency = new ArrayList<>();
+    String mRecentBaseCurrency;
+    String mRecentQuoteCurrency;
 
     // Preference manager
     SharedPreferences mSharedPreferences;
@@ -58,6 +60,10 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         mSubheading.setText(R.string.subheading);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentBaseCurrency = mSharedPreferences.getString(Constants.PREFERENCES_BASE_CURRENCY, null);
+        mRecentQuoteCurrency = mSharedPreferences.getString(Constants.PREFERENCES_QUOTE_CURRENCY, null);
+
+
         mEditor = mSharedPreferences.edit();
 
         Intent intent = getIntent();
