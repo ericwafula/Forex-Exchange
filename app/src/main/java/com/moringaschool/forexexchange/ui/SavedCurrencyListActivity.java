@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -25,9 +27,10 @@ import butterknife.ButterKnife;
 public class SavedCurrencyListActivity extends AppCompatActivity {
     private DatabaseReference mCurrencyReference;
     private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseAdapter;
+    public static final String TAG = SavedCurrencyListActivity.class.getSimpleName();
 
     @BindView(R.id.savedCurrenciesRecyclerView) RecyclerView mSavedCurrenciesRecyclerView;
-    @BindView(R.id.progressBar) RecyclerView mProgressBar;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
 
         mCurrencyReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CURRENCY_PAIR);
         setupFirebaseAdapter();
+        Log.d(TAG, "Unable to to setup firebase adapter");
         hideProgressBar();
         showRestaurants();
     }

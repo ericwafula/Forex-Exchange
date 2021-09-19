@@ -116,14 +116,15 @@
             android:id="@+id/viewCurrencies"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="View List"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/viewCurrenciesHeading"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/white"
             android:background="@color/primary"
-            android:layout_below="@id/viewCurrenciesHeading" />
+            android:text="View List"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
     </RelativeLayout>
 
 
