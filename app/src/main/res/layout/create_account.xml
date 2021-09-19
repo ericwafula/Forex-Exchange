@@ -90,6 +90,21 @@
                 android:text="Already have an account?"
                 android:textColor="@color/primary"
                 android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/firebaseProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/loadingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/primary"
+                android:layout_margin="20dp"
+                android:visibility="gone" />
         </LinearLayout>
 
     </RelativeLayout>

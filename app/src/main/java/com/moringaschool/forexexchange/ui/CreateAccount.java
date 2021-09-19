@@ -7,12 +7,17 @@ import butterknife.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,6 +33,8 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.confirmPassword) EditText mConfirmPassword;
     @BindView(com.moringaschool.forexexchange.R.id.signupButton) Button signupButton;
     @BindView(com.moringaschool.forexexchange.R.id.alreadyHaveAnAccount) TextView alreadyHaveAnAccount;
+    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
+    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
     public static final String TAG = CreateAccount.class.getSimpleName();
 
@@ -56,18 +63,41 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void showProgressBar() {
+        mSignInProgressBar.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setText("Sign Up process in Progress");
+    }
+
+    private void hideProgressBar() {
+        mSignInProgressBar.setVisibility(View.GONE);
+        mLoadingSignUp.setVisibility(View.GONE);
+    }
+
     private void createNewUser(){
         String name = mName.getText().toString();
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
         String confirmPassword = mConfirmPassword.getText().toString();
 
+        boolean validName = isValidName(name);
+        boolean validEmail = isValidEmail(email);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+
+        if (!validName || !validEmail || !validPassword) return;
+        showProgressBar();
+
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()){
-                        Log.d(TAG, "Authentication successful");
-                    } else {
-                        Toast.makeText(CreateAccount.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        hideProgressBar();
+
+                        if (task.isSuccessful()){
+                            Log.d(TAG, "Authentication successful");
+                        } else {
+                            Toast.makeText(CreateAccount.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
@@ -86,6 +116,35 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
+    }
+
+    private boolean isValidEmail(String email){
+        boolean isGoodEmail = (email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail){
+            mEmail.setError("Please enter a valid email address");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidName(String name){
+        if (name.isEmpty()){
+            mName.setError("Please enter your name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword){
+        if (password.length() < 6){
+            mPassword.setError("Password must containt at least 6 characters");
+            return false;
+        }
+        else if (!password.equals(confirmPassword)){
+            mPassword.setError("Passwords do not match");
+            return false;
+        }
+        return true;
     }
 
     @Override
