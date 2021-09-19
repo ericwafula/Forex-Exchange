@@ -42,6 +42,7 @@ import java.util.Locale;
 public class Converter extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrencyPair;
     public static final String TAG = Converter.class.getSimpleName().toString();
+    private ValueEventListener mCurrencyPairListener;
 
     @BindView(com.moringaschool.forexexchange.R.id.user) TextView mUser;
     @BindView(com.moringaschool.forexexchange.R.id.currencies) ListView mCurrencyList;
@@ -66,7 +67,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_CURRENCY_PAIR);
 
-        mCurrencyPair.addValueEventListener(new ValueEventListener() {
+        mCurrencyPairListener = mCurrencyPair.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot currencySnapshot : snapshot.getChildren()){
@@ -167,6 +168,12 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(Converter.this, baseCurrency + "/" + quoteCurrency + " saved to history in database", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mCurrencyPair.removeEventListener(mCurrencyPairListener);
     }
 
     public void addToSharedPreferences(String base, String quote){
