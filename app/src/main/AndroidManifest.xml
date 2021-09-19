@@ -12,8 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ForexExchange">
         <activity
-            android:name=".SavedCurrencyListActivity"
-            android:exported="true" />
+            android:name=".ui.SavedCurrencyListActivity"
+            android:exported="true" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.Converter">
+
+            </meta-data>
+        </activity>
         <activity
             android:name=".ui.Converter"
             android:exported="true"

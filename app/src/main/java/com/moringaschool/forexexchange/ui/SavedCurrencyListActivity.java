@@ -1,8 +1,10 @@
-package com.moringaschool.forexexchange;
+package com.moringaschool.forexexchange.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.moringaschool.forexexchange.R;
 
 public class SavedCurrencyListActivity extends AppCompatActivity {
 
