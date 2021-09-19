@@ -36,7 +36,7 @@ public class FirebaseCurrencyViewHolder extends RecyclerView.ViewHolder implemen
     }
 
     public void bindCurrency(String currency){
-        TextView savedCurrency = (TextView) mView.findViewById(R.id.savedCurrency);
+        TextView savedCurrency = (TextView) mView.findViewById(R.id.currencyView);
 
         savedCurrency.setText(currency);
     }

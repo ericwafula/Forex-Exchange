@@ -51,6 +51,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.calculateButton) Button mCalculate;
     @BindView(R.id.subheading) TextView mSubheading;
     @BindView(R.id.rate) TextView mRate;
+    @BindView(R.id.viewCurrencies) Button mViewCurrenciesButton;
 
     List<String> individualCurrency = new ArrayList<>();
     private String mRecentBaseCurrency;
@@ -87,6 +88,7 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
 
         ButterKnife.bind(this);
         mCalculate.setOnClickListener(this);
+        mViewCurrenciesButton.setOnClickListener(this);
 
         mSubheading.setText(R.string.subheading);
 
@@ -167,6 +169,11 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
                 addToSharedPreferences(baseCurrency, quoteCurrency);
                 Toast.makeText(Converter.this, baseCurrency + "/" + quoteCurrency + " saved to history in database", Toast.LENGTH_LONG).show();
             }
+        }
+
+        if(view == mViewCurrenciesButton){
+            Intent intent = new Intent(Converter.this, SavedCurrencyListActivity.class);
+            startActivity(intent);
         }
     }
 

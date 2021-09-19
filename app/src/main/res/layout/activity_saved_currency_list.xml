@@ -21,15 +21,21 @@
             android:textSize="32sp"
             android:textColor="@color/primary"/>
 
-        <TextView
-            android:id="@+id/savedCurrency"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/savedCurrenciesRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/savedCurrenciesHeading"
-            android:text="@string/usd_cad"
             android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:textSize="24sp"/>
+            android:textSize="24sp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </ScrollView>
