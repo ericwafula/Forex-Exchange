@@ -48,11 +48,12 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:hint="username"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
                 android:text=""
                 android:textSize="24sp" />
 
@@ -61,7 +62,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:hint="password"
+                android:hint="Password"
+                android:inputType="textPassword"
                 android:text=""
                 android:textSize="24sp" />
 
@@ -97,6 +99,23 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/primary"/>
+
+            <ProgressBar
+                android:id="@+id/firebaseProgressBar"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/loadingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/firebaseProgressBar"
+                android:textColor="@color/primary"
+                android:layout_margin="20dp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
