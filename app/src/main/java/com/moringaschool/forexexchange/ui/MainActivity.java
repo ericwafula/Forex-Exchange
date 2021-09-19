@@ -11,18 +11,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moringaschool.forexexchange.R;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(com.moringaschool.forexexchange.R.id.loginButton) Button mLogin;
     @BindView(com.moringaschool.forexexchange.R.id.username) EditText mUsername;
     @BindView(com.moringaschool.forexexchange.R.id.password) EditText mPassword;
     @BindView(com.moringaschool.forexexchange.R.id.createAnAccountText) TextView createAnAccount;
+    @BindView(R.id.forexImage) ImageView mForexImage;
 
     public static final String TAG = MainActivity.class.getSimpleName();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         ButterKnife.bind(this);
+
+        Picasso.get().load(R.drawable.exchange).into(mForexImage);
 
         mLogin.setOnClickListener(this);
         createAnAccount.setOnClickListener(this);
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view == mLogin){
             String username = mUsername.getText().toString();
             String password = mPassword.getText().toString();
+
+
 
             if(!(username.isEmpty() || password.isEmpty())){
                 Intent intent = new Intent(MainActivity.this, Converter.class);
