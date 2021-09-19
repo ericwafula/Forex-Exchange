@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.forexexchange.R;
+
+import java.util.Objects;
 
 public class CreateAccount extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth mAuth;
@@ -37,6 +40,7 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
     public static final String TAG = CreateAccount.class.getSimpleName();
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +79,10 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     }
 
     private void createNewUser(){
-        String name = mName.getText().toString();
-        String email = mEmail.getText().toString();
-        String password = mPassword.getText().toString();
-        String confirmPassword = mConfirmPassword.getText().toString();
+        name = mName.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        String confirmPassword = mConfirmPassword.getText().toString().trim();
 
         boolean validName = isValidName(name);
         boolean validEmail = isValidEmail(email);
@@ -95,6 +99,7 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
 
                         if (task.isSuccessful()){
                             Log.d(TAG, "Authentication successful");
+                            createFirebaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
                         } else {
                             Toast.makeText(CreateAccount.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }
@@ -116,6 +121,26 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
+    }
+
+    private void createFirebaseUserProfile(final FirebaseUser user) {
+
+        UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+
+        user.updateProfile(addProfileName)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
+                            Toast.makeText(CreateAccount.this, "The display name has ben set", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                });
     }
 
     private boolean isValidEmail(String email){

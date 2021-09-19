@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,6 +66,10 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor mEditor;
 
+    // firebase
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mCurrencyPair = FirebaseDatabase
@@ -99,6 +104,20 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentBaseCurrency = mSharedPreferences.getString(Constants.PREFERENCES_BASE_CURRENCY, null);
         mRecentQuoteCurrency = mSharedPreferences.getString(Constants.PREFERENCES_QUOTE_CURRENCY, null);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
+
+                }
+            }
+        };
 
         mBaseCurrency.setText(mRecentBaseCurrency);
         mQuoteCurrency.setText(mRecentQuoteCurrency);
@@ -204,6 +223,20 @@ public class Converter extends AppCompatActivity implements View.OnClickListener
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     @Override
