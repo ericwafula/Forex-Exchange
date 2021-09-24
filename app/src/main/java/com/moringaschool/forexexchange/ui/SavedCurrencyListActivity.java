@@ -2,6 +2,7 @@ package com.moringaschool.forexexchange.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import com.moringaschool.forexexchange.adapters.FirebaseCurrencyListAdapter;
 import com.moringaschool.forexexchange.adapters.FirebaseCurrencyViewHolder;
 import com.moringaschool.forexexchange.network.Constants;
 import com.moringaschool.forexexchange.util.OnStartDragListener;
+import com.moringaschool.forexexchange.util.SimpleItemTouchHelperCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +34,7 @@ public class SavedCurrencyListActivity extends AppCompatActivity implements OnSt
     public static final String TAG = SavedCurrencyListActivity.class.getSimpleName();
 
     FirebaseCurrencyListAdapter mFirebaseAdapter;
+    private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.savedCurrenciesRecyclerView) RecyclerView mSavedCurrenciesRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -70,20 +73,24 @@ public class SavedCurrencyListActivity extends AppCompatActivity implements OnSt
             }
         };
         mSavedCurrenciesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mSavedCurrenciesRecyclerView.setAdapter(mFirebaseRecyclerAdapter);
+        mSavedCurrenciesRecyclerView.setAdapter(mFirebaseAdapter);
+        mSavedCurrenciesRecyclerView.setHasFixedSize(true);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mSavedCurrenciesRecyclerView);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mFirebaseRecyclerAdapter.startListening();
+        mFirebaseAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(mFirebaseRecyclerAdapter!= null) {
-            mFirebaseRecyclerAdapter.stopListening();
+        if(mFirebaseAdapter!= null) {
+            mFirebaseAdapter.stopListening();
         }
     }
 
@@ -97,6 +104,6 @@ public class SavedCurrencyListActivity extends AppCompatActivity implements OnSt
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-
+        mItemTouchHelper.startDrag(viewHolder);
     }
 }
