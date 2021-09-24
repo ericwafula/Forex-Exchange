@@ -1,6 +1,8 @@
 package com.moringaschool.forexexchange.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
+import com.moringaschool.forexexchange.R;
 import com.moringaschool.forexexchange.util.ItemTouchHelperAdapter;
 import com.moringaschool.forexexchange.util.OnStartDragListener;
 
@@ -30,13 +33,14 @@ public class FirebaseCurrencyListAdapter extends FirebaseRecyclerAdapter<String,
 
     @Override
     protected void onBindViewHolder(@NonNull FirebaseCurrencyViewHolder holder, int position, @NonNull String model) {
-
+        holder.bindCurrency(model);
     }
 
     @NonNull
     @Override
     public FirebaseCurrencyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currency_list_item, parent, false);
+        return new FirebaseCurrencyViewHolder(view);
     }
 
     @Override
