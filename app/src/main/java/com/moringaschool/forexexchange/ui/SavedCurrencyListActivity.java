@@ -18,16 +18,20 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.forexexchange.R;
+import com.moringaschool.forexexchange.adapters.FirebaseCurrencyListAdapter;
 import com.moringaschool.forexexchange.adapters.FirebaseCurrencyViewHolder;
 import com.moringaschool.forexexchange.network.Constants;
+import com.moringaschool.forexexchange.util.OnStartDragListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedCurrencyListActivity extends AppCompatActivity {
+public class SavedCurrencyListActivity extends AppCompatActivity implements OnStartDragListener {
     private DatabaseReference mCurrencyReference;
-    private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseRecyclerAdapter;
     public static final String TAG = SavedCurrencyListActivity.class.getSimpleName();
+
+    FirebaseCurrencyListAdapter mFirebaseAdapter;
 
     @BindView(R.id.savedCurrenciesRecyclerView) RecyclerView mSavedCurrenciesRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -52,7 +56,7 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
                 .setQuery(mCurrencyReference, String.class)
                 .build();
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseCurrencyListAdapter(options, mCurrencyReference, (OnStartDragListener) this, this) {
             @Override
             protected void onBindViewHolder(@NonNull FirebaseCurrencyViewHolder holder, int position, @NonNull String model) {
                 holder.bindCurrency(model);
@@ -66,20 +70,20 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
             }
         };
         mSavedCurrenciesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mSavedCurrenciesRecyclerView.setAdapter(mFirebaseAdapter);
+        mSavedCurrenciesRecyclerView.setAdapter(mFirebaseRecyclerAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mFirebaseAdapter.startListening();
+        mFirebaseRecyclerAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(mFirebaseAdapter!= null) {
-            mFirebaseAdapter.stopListening();
+        if(mFirebaseRecyclerAdapter!= null) {
+            mFirebaseRecyclerAdapter.stopListening();
         }
     }
 
@@ -89,5 +93,10 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
 
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+
     }
 }
