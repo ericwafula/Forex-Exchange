@@ -31,6 +31,7 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
 
     @BindView(R.id.savedCurrenciesRecyclerView) RecyclerView mSavedCurrenciesRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.savedCurrenciesHeading) TextView mSavedCurrenciesHeading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
