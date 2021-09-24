@@ -6,9 +6,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
 
+    private final ItemTouchHelperAdapter mAdapter;
+
+    public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter mAdapter) {
+        this.mAdapter = mAdapter;
+    }
+
+    @Override
+    public boolean isLongPressDragEnabled(){
+        return true;
+    }
+
+    @Override
+    public boolean isItemViewSwipeEnabled(){
+        return true;
+    }
+
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-        return 0;
+        final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+        final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+        return makeMovementFlags(dragFlags, swipeFlags);
     }
 
     @Override
