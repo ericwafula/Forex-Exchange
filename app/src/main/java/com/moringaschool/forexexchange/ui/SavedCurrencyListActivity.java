@@ -23,16 +23,18 @@ import com.moringaschool.forexexchange.R;
 import com.moringaschool.forexexchange.adapters.FirebaseCurrencyListAdapter;
 import com.moringaschool.forexexchange.adapters.FirebaseCurrencyViewHolder;
 import com.moringaschool.forexexchange.network.Constants;
+import com.moringaschool.forexexchange.util.OnStartDragListener;
+import com.moringaschool.forexexchange.util.SimpleItemTouchHelperCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedCurrencyListActivity extends AppCompatActivity {
+public class SavedCurrencyListActivity extends AppCompatActivity implements OnStartDragListener {
     private DatabaseReference mCurrencyReference;
     private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseAdapter;
     public static final String TAG = SavedCurrencyListActivity.class.getSimpleName();
 
-    // custom adapter
+    // custom item touch helper
     FirebaseCurrencyListAdapter firebaseCurrencyListAdapter;
     private ItemTouchHelper mItemTouchHelper;
 
@@ -57,35 +59,31 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
                 .setQuery(mCurrencyReference, String.class)
                 .build();
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull FirebaseCurrencyViewHolder holder, int position, @NonNull String model) {
-                holder.bindCurrency(model);
-            }
-
-            @NonNull
-            @Override
-            public FirebaseCurrencyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currency_list_item, parent, false);
-                return new FirebaseCurrencyViewHolder(view);
-            }
-        };
+        firebaseCurrencyListAdapter = new FirebaseCurrencyListAdapter(options, mCurrencyReference, (OnStartDragListener)this, this);
         mSavedCurrenciesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mSavedCurrenciesRecyclerView.setAdapter(mFirebaseAdapter);
+        mSavedCurrenciesRecyclerView.setAdapter(firebaseCurrencyListAdapter);
+        mSavedCurrenciesRecyclerView.setHasFixedSize(true);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(firebaseCurrencyListAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mSavedCurrenciesRecyclerView);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mFirebaseAdapter.startListening();
+        firebaseCurrencyListAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(mFirebaseAdapter!= null) {
-            mFirebaseAdapter.stopListening();
+        if(firebaseCurrencyListAdapter!= null) {
+            firebaseCurrencyListAdapter.stopListening();
         }
+    }
+
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder){
+        mItemTouchHelper.startDrag(viewHolder);
     }
 
     private void showRestaurants() {
