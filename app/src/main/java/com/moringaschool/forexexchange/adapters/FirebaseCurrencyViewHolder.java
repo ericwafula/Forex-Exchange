@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.moringaschool.forexexchange.ConversionRates;
 import com.moringaschool.forexexchange.R;
 import com.moringaschool.forexexchange.network.Constants;
 import com.moringaschool.forexexchange.ui.SavedCurrencyListActivity;
+import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
@@ -29,6 +31,8 @@ public class FirebaseCurrencyViewHolder extends RecyclerView.ViewHolder implemen
     View mView;
     Context mContext;
 
+    public ImageView imageView;
+
     public FirebaseCurrencyViewHolder(@NonNull View itemView) {
         super(itemView);
         mView = itemView;
@@ -38,7 +42,9 @@ public class FirebaseCurrencyViewHolder extends RecyclerView.ViewHolder implemen
 
     public void bindCurrency(String currency){
         TextView savedCurrency = (TextView) mView.findViewById(R.id.currencyView);
+        imageView = (ImageView) mView.findViewById(R.id.imageView);
 
+        Picasso.get().load(R.drawable.baseline_drag_handle_black_24dp).into(imageView);
         savedCurrency.setText(currency);
     }
 
