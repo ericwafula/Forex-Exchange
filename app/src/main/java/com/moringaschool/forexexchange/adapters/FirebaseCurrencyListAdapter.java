@@ -2,6 +2,7 @@ package com.moringaschool.forexexchange.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,6 +35,15 @@ public class FirebaseCurrencyListAdapter extends FirebaseRecyclerAdapter<String,
     @Override
     protected void onBindViewHolder(@NonNull FirebaseCurrencyViewHolder holder, int position, @NonNull String model) {
         holder.bindCurrency(model);
+        holder.imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    mOnStartDragListener.onStartDrag(holder);
+                }
+                return false;
+            }
+        });
     }
 
     @NonNull
