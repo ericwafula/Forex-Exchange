@@ -2,7 +2,6 @@ package com.moringaschool.forexexchange.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,26 +18,19 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.forexexchange.R;
-import com.moringaschool.forexexchange.adapters.FirebaseCurrencyListAdapter;
 import com.moringaschool.forexexchange.adapters.FirebaseCurrencyViewHolder;
 import com.moringaschool.forexexchange.network.Constants;
-import com.moringaschool.forexexchange.util.OnStartDragListener;
-import com.moringaschool.forexexchange.util.SimpleItemTouchHelperCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedCurrencyListActivity extends AppCompatActivity implements OnStartDragListener {
+public class SavedCurrencyListActivity extends AppCompatActivity {
     private DatabaseReference mCurrencyReference;
-    private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseRecyclerAdapter;
+    private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseAdapter;
     public static final String TAG = SavedCurrencyListActivity.class.getSimpleName();
-
-    FirebaseCurrencyListAdapter mFirebaseAdapter;
-    private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.savedCurrenciesRecyclerView) RecyclerView mSavedCurrenciesRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.savedCurrenciesHeading) TextView mSavedCurrenciesHeading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +51,7 @@ public class SavedCurrencyListActivity extends AppCompatActivity implements OnSt
                 .setQuery(mCurrencyReference, String.class)
                 .build();
 
-        mFirebaseAdapter = new FirebaseCurrencyListAdapter(options, mCurrencyReference, (OnStartDragListener) this, this) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull FirebaseCurrencyViewHolder holder, int position, @NonNull String model) {
                 holder.bindCurrency(model);
@@ -74,10 +66,6 @@ public class SavedCurrencyListActivity extends AppCompatActivity implements OnSt
         };
         mSavedCurrenciesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSavedCurrenciesRecyclerView.setAdapter(mFirebaseAdapter);
-        mSavedCurrenciesRecyclerView.setHasFixedSize(true);
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mSavedCurrenciesRecyclerView);
     }
 
     @Override
@@ -100,10 +88,5 @@ public class SavedCurrencyListActivity extends AppCompatActivity implements OnSt
 
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
     }
 }
