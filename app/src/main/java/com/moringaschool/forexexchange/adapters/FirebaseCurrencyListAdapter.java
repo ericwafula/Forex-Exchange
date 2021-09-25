@@ -20,10 +20,10 @@ public class FirebaseCurrencyListAdapter extends FirebaseRecyclerAdapter<String,
     private OnStartDragListener mOnStartDragListener;
     private Context mContext;
 
-    public FirebaseCurrencyListAdapter(@NonNull FirebaseRecyclerOptions<String> options,
-                                       DatabaseReference ref,
-                                       OnStartDragListener onStartDragListener,
-                                       Context context) {
+    public FirebaseCurrencyListAdapter(FirebaseRecyclerOptions<String> options,
+                                         DatabaseReference ref,
+                                         OnStartDragListener onStartDragListener,
+                                         Context context){
         super(options);
         mRef = ref.getRef();
         mOnStartDragListener = onStartDragListener;

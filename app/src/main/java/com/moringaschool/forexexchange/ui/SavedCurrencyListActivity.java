@@ -2,6 +2,7 @@ package com.moringaschool.forexexchange.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.forexexchange.R;
+import com.moringaschool.forexexchange.adapters.FirebaseCurrencyListAdapter;
 import com.moringaschool.forexexchange.adapters.FirebaseCurrencyViewHolder;
 import com.moringaschool.forexexchange.network.Constants;
 
@@ -28,6 +31,10 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
     private DatabaseReference mCurrencyReference;
     private FirebaseRecyclerAdapter<String, FirebaseCurrencyViewHolder> mFirebaseAdapter;
     public static final String TAG = SavedCurrencyListActivity.class.getSimpleName();
+
+    // custom adapter
+    FirebaseCurrencyListAdapter firebaseCurrencyListAdapter;
+    private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.savedCurrenciesRecyclerView) RecyclerView mSavedCurrenciesRecyclerView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -41,7 +48,6 @@ public class SavedCurrencyListActivity extends AppCompatActivity {
 
         mCurrencyReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CURRENCY_PAIR);
         setupFirebaseAdapter();
-        Log.d(TAG, "Unable to to setup firebase adapter");
         hideProgressBar();
         showRestaurants();
     }
