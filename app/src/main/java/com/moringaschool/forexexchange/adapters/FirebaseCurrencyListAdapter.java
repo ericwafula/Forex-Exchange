@@ -54,12 +54,13 @@ public class FirebaseCurrencyListAdapter extends FirebaseRecyclerAdapter<String,
     }
 
     @Override
-    public boolean onItemMove(int fromPosition, int ToPosition) {
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        notifyItemMoved(fromPosition, toPosition);
         return false;
     }
 
     @Override
     public void onItemDismiss(int position) {
-
+        getRef(position).removeValue();
     }
 }
