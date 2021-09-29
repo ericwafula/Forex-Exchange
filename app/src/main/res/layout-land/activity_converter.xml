@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Converter">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/welcome_message"
+            android:textColor="@color/primary"
+            android:textSize="32sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/user"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Base: "
+                android:textSize="24sp"/>
+
+            <EditText
+                android:id="@+id/baseCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/base_currency"
+                android:maxLength="3"
+                android:textSize="36sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quote: "
+                android:textSize="24sp"
+                android:layout_marginStart="20dp"/>
+
+            <EditText
+                android:id="@+id/quoteCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quote_currency"
+                android:maxLength="3"
+                android:textSize="36sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/calculateButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/linearLayout"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/primary"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate: "
+            android:layout_below="@+id/calculateButton"
+            android:layout_marginStart="40dp"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rate"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="24sp"
+            android:text=""/>
+
+        <ListView
+            android:id="@+id/currencies"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/subheading"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/viewCurrenciesHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View your currencies history "
+            android:layout_below="@+id/currencies"
+            android:layout_marginStart="20dp"
+            android:textSize="24sp"
+            android:layout_marginTop="40dp"/>
+
+        <Button
+            android:id="@+id/viewCurrencies"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/viewCurrenciesHeading"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/primary"
+            android:text="View List"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+
+
+</ScrollView>
